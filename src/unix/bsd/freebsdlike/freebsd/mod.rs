@@ -4874,6 +4874,9 @@ cfg_if! {
         /// sys/socket.h
         pub const AF_NETLINK: ::c_int = 38;
         pub const PF_NETLINK: ::c_int = AF_NETLINK;
+        
+        /// Not Supported (added for now just to compile)
+        pub const AF_BRIDGE: ::c_int = 7;
 
         /// netlink/netlink.h
         pub const NETLINK_ADD_MEMBERSHIP: ::c_int = 1;
