@@ -4860,6 +4860,75 @@ pub const TFD_CLOEXEC: ::c_int = O_CLOEXEC;
 pub const TFD_TIMER_ABSTIME: ::c_int = 0x01;
 pub const TFD_TIMER_CANCEL_ON_SET: ::c_int = 0x02;
 
+// Ethernet - START
+// - net/ethernet.h
+pub const ETHER_ADDR_LEN: ::c_int = 6;
+
+// - linux/if_ether.h
+pub const ETH_ALEN: ::c_int = ETHER_ADDR_LEN;
+// Ethernet - END
+
+cfg_if! {
+    if #[cfg(any(freebsd13, freebsd14, freebsd15))] {
+        // Netlink - START
+        /// sys/socket.h
+        pub const AF_NETLINK: ::c_int = 38;
+        pub const PF_NETLINK: ::c_int = AF_NETLINK;
+
+        /// netlink/netlink.h
+        pub const NETLINK_ADD_MEMBERSHIP: ::c_int = 1;
+        pub const NETLINK_DROP_MEMBERSHIP: ::c_int = 2;
+        pub const NETLINK_PKTINFO: ::c_int = 3;
+        pub const NETLINK_BROADCAST_ERROR: ::c_int = 4;
+        pub const NETLINK_NO_ENOBUFS: ::c_int = 5;
+        pub const NETLINK_LISTEN_ALL_NSID: ::c_int = 8;
+        pub const NETLINK_CAP_ACK: ::c_int = 10;
+        pub const NETLINK_EXT_ACK: ::c_int = 11;
+        pub const NETLINK_GET_STRICT_CHK: ::c_int = 12;
+        pub const SOL_NETLINK: ::c_int = 270;
+
+        s_no_extra_traits! {
+            pub struct sockaddr_nl {
+                pub nl_len: u8,
+                pub nl_family: ::sa_family_t,
+                nl_pad: ::c_ushort,
+                pub nl_pid: u32,
+                pub nl_groups: u32
+            }
+        }
+
+        cfg_if! {
+            if #[cfg(feature = "extra_traits")] {
+                impl PartialEq for sockaddr_nl {
+                    fn eq(&self, other: &sockaddr_nl) -> bool {
+                        self.nl_family == other.nl_family &&
+                            self.nl_pid == other.nl_pid &&
+                            self.nl_groups == other.nl_groups
+                    }
+                }
+                impl Eq for sockaddr_nl {}
+                impl ::fmt::Debug for sockaddr_nl {
+                    fn fmt(&self, f: &mut ::fmt::Formatter) -> ::fmt::Result {
+                        f.debug_struct("sockaddr_nl")
+                            .field("nl_family", &self.nl_family)
+                            .field("nl_pid", &self.nl_pid)
+                            .field("nl_groups", &self.nl_groups)
+                            .finish()
+                    }
+                }
+                impl ::hash::Hash for sockaddr_nl {
+                    fn hash<H: ::hash::Hasher>(&self, state: &mut H) {
+                        self.nl_family.hash(state);
+                        self.nl_pid.hash(state);
+                        self.nl_groups.hash(state);
+                    }
+                }
+            }
+        }
+        // Netlink - END
+    }
+}
+
 cfg_if! {
     if #[cfg(libc_const_extern_fn)] {
         pub const fn MAP_ALIGNED(a: ::c_int) -> ::c_int {

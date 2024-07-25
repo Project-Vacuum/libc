@@ -468,30 +468,6 @@ pub const DOMAINSET_POLICY_INTERLEAVE: ::c_int = 4;
 
 pub const MINCORE_SUPER: ::c_int = 0x60;
 
-// Netlink
-pub const NETLINK_ADD_MEMBERSHIP: ::c_int = 1;
-pub const NETLINK_DROP_MEMBERSHIP: ::c_int = 2;
-pub const NETLINK_PKTINFO: ::c_int = 3;
-pub const NETLINK_BROADCAST_ERROR: ::c_int = 4;
-pub const NETLINK_NO_ENOBUFS: ::c_int = 5;
-pub const NETLINK_LISTEN_ALL_NSID: ::c_int = 8;
-pub const NETLINK_CAP_ACK: ::c_int = 10;
-pub const NETLINK_EXT_ACK: ::c_int = 11;
-pub const NETLINK_GET_STRICT_CHK: ::c_int = 12;
-pub const SOL_NETLINK: ::c_int = 270;
-pub const AF_NETLINK: ::c_int = 38;
-pub const PF_NETLINK: ::c_int = AF_NETLINK;
-
-s_no_extra_traits! {
-    pub struct sockaddr_nl {
-        pub nl_len: u8,
-        pub nl_family: ::sa_family_t,
-        nl_pad: ::c_ushort,
-        pub nl_pid: u32,
-        pub nl_groups: u32
-    }
-}
-
 safe_f! {
     pub {const} fn makedev(major: ::c_uint, minor: ::c_uint) -> ::dev_t {
         let major = major as ::dev_t;
