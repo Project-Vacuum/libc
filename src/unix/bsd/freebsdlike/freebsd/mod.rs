@@ -4866,6 +4866,9 @@ pub const ETHER_ADDR_LEN: ::c_int = 6;
 
 // - linux/if_ether.h
 pub const ETH_ALEN: ::c_int = ETHER_ADDR_LEN;
+
+// - net/if_arp.h
+pub const ARPHRD_ETHER: ::c_int = 1;
 // Ethernet - END
 
 cfg_if! {
