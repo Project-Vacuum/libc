@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [0.2.159](https://github.com/Project-Vacuum/libc/compare/0.2.158...0.2.159) - 2024-08-26
+
+### Other
+- Add android-riscv64 API check
+- Add missing constant for Android
+
 ## [0.2.158](https://github.com/rust-lang/libc/compare/0.2.157...0.2.158) - 2024-08-19
 
 ### Other
