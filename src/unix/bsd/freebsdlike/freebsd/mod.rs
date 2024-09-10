@@ -4894,7 +4894,7 @@ cfg_if! {
         pub const SOL_NETLINK: ::c_int = 270;
 
         /// netlink/netlink_route.h
-        pub const RT_TABLE_MAIN: ::c_int = 0;
+        pub const RT_TABLE_MAIN: ::c_uchar = 0;
 
         s_no_extra_traits! {
             pub struct sockaddr_nl {
