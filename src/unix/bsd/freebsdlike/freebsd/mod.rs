@@ -4893,6 +4893,9 @@ cfg_if! {
         pub const NETLINK_GET_STRICT_CHK: ::c_int = 12;
         pub const SOL_NETLINK: ::c_int = 270;
 
+        /// netlink/netlink_route.h
+        pub const RT_TABLE_MAIN: ::c_int = 0;
+
         s_no_extra_traits! {
             pub struct sockaddr_nl {
                 pub nl_len: u8,
